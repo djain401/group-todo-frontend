@@ -1,0 +1,252 @@
+:root {
+  --light-grey: rgb(245, 240, 230);
+  --mid-grey: rgba(0, 0, 0, 0.5);
+  --orange: rgba(219, 105, 12, 1);
+  --blush: rgba(219, 157, 132, 1);
+  --light-blue: rgba(121, 181, 219, 1);
+  --dark-blue: rgb(20, 68, 99);
+  --yellow: rgb(248, 230, 166);
+}
+
+* {
+  font-size: 18px;
+}
+
+body {
+  font-family: 'Spectral', Georgia, Times, serif;
+}
+
+/*******************************************
+* HEADINGS & PARAGRAPHS
+*
+* h1-h6 values and line-heights  go here.
+******************************************/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a,
+button,
+li.item {
+  font-family: 'Lato', Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  font-size: 3rem;
+  line-height: 2;
+  letter-spacing: 2px;
+}
+
+h2 {
+  font-size: 2rem;
+  line-height: 1.5;
+}
+
+h3 {
+  font-size: 1.4rem;
+  line-height: 1.3;
+}
+
+h4 {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+h5 {
+  font-size: 0.8rem;
+}
+
+h6 {
+  font-size: 0.6rem;
+}
+
+a,
+p,
+article,
+table,
+figcaption {
+  padding: 0.3rem 1rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-align: center;
+}
+
+body,
+main {
+  background: var(--light-grey);
+  color: black;
+}
+
+header {
+  background: linear-gradient(
+    to left,
+    var(--orange),
+    var(--blush),
+    var(--yellow)
+  );
+  text-align: center;
+}
+
+figure {
+  background: var(--light-grey);
+  border: 3px solid var(--mid-grey);
+  border-radius: 8px;
+}
+
+#logo {
+  background-image: url('./flower-logo.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+/*** LINKS ***/
+a,
+a:visited {
+  font-size: 1.6rem;
+  color: var(--dark-blue);
+  border-bottom: var(--dark-blue);
+}
+
+a:hover,
+a:focus {
+  background-color: var(--dark-blue);
+  color: white;
+  border-bottom: transparent;
+}
+
+/********************************************
+ * LAYOUT
+ *
+ * Setting up the padding, basic colours, and
+ * any positioning.
+ ********************************************/
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+/*** HEADER ***/
+header {
+  display: flex;
+  flex-direction: row nowrap;
+  justify-content: space-between;
+}
+
+div#logo {
+  width: 200px;
+  height: 200px;
+  flex-shrink: 3;
+}
+
+div.header-titles {
+  flex-grow: 4;
+}
+
+/*** BODY CONTENT ***/
+pre,
+code,
+p,
+main {
+  padding: 1rem;
+}
+
+/*** FOOTER ***/
+footer {
+  margin-top: 0.6rem;
+  width: 100%;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/*** navigation ***/
+nav {
+  background: var(--light-blue);
+}
+
+a {
+  text-decoration: none;
+}
+
+.menu,
+.submenu {
+  list-style-type: none;
+}
+
+.item {
+  padding: 0.3rem 0.5rem;
+}
+
+.item.button {
+  padding: 0.3rem 0.6rem;
+}
+
+.item:not(.button) a:hover,
+.item a:hover::after {
+  color: --var(--dark-blue);
+}
+
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu li a {
+  display: block;
+  padding: 1rem 0.3rem;
+}
+
+/* MEDIA QUERIES */
+/* mobile screens */
+@media screen and (max-width: 700px) {
+  div#logo {
+    width: 80px;
+    height: 80px;
+  }
+
+  .menu {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  section.card-container {
+    display: block;
+  }
+
+  .wishlist-card {
+    margin: 0 auto;
+  }
+}
+
+/* tablet screens */
+@media screen and (max-width: 1024px) {
+  header h1 {
+    font-size: 2.6rem;
+  }
+
+  header h2 {
+    font-size: 2rem;
+  }
+}
+
+/* bigger screens */
+@media screen and (min-width: 1025px) {
+  header h1 {
+    font-size: 4rem;
+  }
+
+  header h2 {
+    font-size: 3rem;
+  }
+}
