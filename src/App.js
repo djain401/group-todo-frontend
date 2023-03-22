@@ -1,23 +1,37 @@
-import logo from './logo.svg';
+import FancyTable from './components/FancyTable/FancyTable';
 import './App.css';
 
 function App() {
+  const dummyData = [{
+    id: 1,
+    task: 'Finish this table',
+    status: false
+  },
+  {
+    id: 2,
+    task: 'Read Bootstrap pink theme',
+    status: false
+  },
+  {
+    id: 3,
+    task: 'Get scaffolders to finish the job',
+    status: true
+  },
+  {
+    id: 4,
+    task: 'Finish update, delete on CRUD app',
+    status: false
+  }
+];
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      
+      {/* Testing the table component with dummy data
+      Headers should be an array,
+      data should be an array of objects. */}
+      <FancyTable headers={['Task', 'Status', 'Edit', 'Delete']} data={dummyData} />
     </div>
   );
 }
