@@ -5,6 +5,25 @@ import DisplayToDo from '../components/DisplayToDo';
 import Table from 'react-bootstrap/Table';
 import AddToDo from '../components/AddToDo';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+//import 'react-tooltip/dist/react-tooltip.css';
+import Accordion from 'react-bootstrap/Accordion';
+import Stack from 'react-bootstrap/Stack';
+import {
+  Pencil,
+  SquareFill,
+  SortAlphaDown,
+  Star,
+  Trash3,
+  Save,
+} from 'react-bootstrap-icons';
+
+//import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+
+//import BootstrapTable from 'react-bootstrap-table-next';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+
 const Home = () => {
   const [todoList, setTodoList] = useState([]);
   const [showEmpty, setShowEmpty] = useState(false);
@@ -66,8 +85,7 @@ const Home = () => {
                 ))}
             </tbody>
           </Table> */}
-          return ( //{' '}
-          <BootstrapTable keyField="id" data={products} columns={columns} />
+
           <Table style={{ width: '625px' }} striped bordered hover>
             <thead>
               <tr>
@@ -152,7 +170,6 @@ const Home = () => {
               </tr>
             </tbody>
           </Table>
-          );
         </Container>
       </Container>
     </>
