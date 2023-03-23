@@ -4,13 +4,13 @@ import axios from "axios";
 import DisplayToDo from "../components/DisplayToDo";
 import Table from "react-bootstrap/Table";
 import Search from "../components/Search";
-import { SortAlphaDown } from "react-bootstrap-icons";
 import AddTask from "../components/AddTask";
 
 const Home = () => {
   const [todoList, setTodoList] = useState([]);
   const [showEmpty, setShowEmpty] = useState(false);
   const [showItems, setShowItems] = useState(false);
+  const [searchField, setSearchField] = useState("");
 
   const addHandler = async (task) => {
     try {
@@ -23,6 +23,21 @@ const Home = () => {
       alert("Error! Try again");
     }
   };
+
+  const searchHandler = async (searchValue) => {
+    setSearchField(searchValue);
+    console.log(searchField);
+    console.log(searchValue);
+  };
+
+  const updateHandler = async (todo, id) => {
+    const result = await axios.put(
+      `${process.env.REACT_APP_BE_LOCAL}/todo/${id}`,
+      todo
+    );
+    setTodoList(result.data);
+  };
+
   useEffect(() => {
     try {
       const getTodoList = async () => {
@@ -46,7 +61,7 @@ const Home = () => {
     <>
       <Container className="mt-4" fluid>
         <Container>
-          <Search />
+          <Search searchHandler={searchHandler} />
         </Container>
 
         <br />
@@ -56,7 +71,7 @@ const Home = () => {
             <thead>
               <tr>
                 <th
-                  colspan={4}
+                  colSpan={4}
                   style={{ fontSize: "1.25rem", alignContent: "center" }}
                 >
                   To Do List
@@ -67,9 +82,18 @@ const Home = () => {
               <AddTask addHandler={addHandler} />
               {showEmpty && <p>Your List is Empty ¯\_(ツ)_/¯</p>}
               {showItems &&
-                todoList.map((task, index) => (
-                  <DisplayToDo task={task} index={index} />
-                ))}
+                todoList
+                  .filter((task) => {
+                    return task.title.toLocaleLowerCase().includes(searchField);
+                  })
+                  .map((task, index) => (
+                    <DisplayToDo
+                      task={task}
+                      index={index}
+                      key={index}
+                      updateHandler={updateHandler}
+                    />
+                  ))}
             </tbody>
           </Table>
         </Container>

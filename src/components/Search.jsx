@@ -1,39 +1,16 @@
-import { Form, Button } from "react-bootstrap";
+import { Form } from "react-bootstrap";
+import React from "react";
 
-const Search = ({ addHandler }) => {
-  // const [task, setTask] = useState("");
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const data = {
-      title: e.target.title.value,
-      status: false,
-    };
-
-    await addHandler(data);
-    e.target.title.value = "";
-  };
-
+const Search = ({ searchHandler }) => {
   return (
     <>
-      <Form onSubmit={handleSubmit} id="form" className=" d-flex gap-3 w-50">
+      <Form id="form" className="d-flex gap-3 w-50">
         <Form.Control
           // className="search-box py-2"
-          placeholder="What do you need to do today?"
-          minLength="2"
+          placeholder="Search tasks"
           name="title"
-          required
+          onChange={(e) => searchHandler(e.target.value)}
         />
-        <Button
-          style={{
-            background: "#a16bfe",
-            border: "none",
-            color: "white",
-          }}
-          className="search-btn"
-          type="submit"
-        >
-          +
-        </Button>
       </Form>
     </>
   );

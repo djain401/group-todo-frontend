@@ -16,7 +16,7 @@ function NavBar() {
     <Navbar className="navbar" expand="lg">
       <Container>
         <Navbar.Brand style={{ color: "white", fontWeight: "bold" }} href="#">
-          My Todo List
+          Todo App
         </Navbar.Brand>
 
         <Navbar>
