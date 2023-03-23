@@ -1,7 +1,8 @@
 import { Form } from "react-bootstrap";
-import React from "react";
+import React, { useState } from "react";
 
 const Search = ({ searchHandler }) => {
+  const [searchField, setSearchField] = useState("");
   return (
     <>
       <Form id="form" className="d-flex gap-3 w-50">
@@ -9,7 +10,10 @@ const Search = ({ searchHandler }) => {
           // className="search-box py-2"
           placeholder="Search tasks"
           name="title"
-          onChange={(e) => searchHandler(e.target.value)}
+          onChange={(e) => {
+            setSearchField(e.target.value);
+            searchHandler(searchField);
+          }}
         />
       </Form>
     </>

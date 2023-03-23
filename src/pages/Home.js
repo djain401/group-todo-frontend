@@ -10,7 +10,7 @@ const Home = () => {
   const [todoList, setTodoList] = useState([]);
   const [showEmpty, setShowEmpty] = useState(false);
   const [showItems, setShowItems] = useState(false);
-  const [searchField, setSearchField] = useState("");
+  const [searchValue, setSearchValue] = useState("");
 
   const addHandler = async (task) => {
     try {
@@ -24,10 +24,8 @@ const Home = () => {
     }
   };
 
-  const searchHandler = async (searchValue) => {
-    setSearchField(searchValue);
-    console.log(searchField);
-    console.log(searchValue);
+  const searchHandler = async (value) => {
+    setSearchValue(value);
   };
 
   const updateHandler = async (todo, id) => {
@@ -84,7 +82,7 @@ const Home = () => {
               {showItems &&
                 todoList
                   .filter((task) => {
-                    return task.title.toLocaleLowerCase().includes(searchField);
+                    return task.title.toLocaleLowerCase().includes(searchValue);
                   })
                   .map((task, index) => (
                     <DisplayToDo
