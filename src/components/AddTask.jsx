@@ -1,5 +1,5 @@
-import React from "react";
-import { Form, Button } from "react-bootstrap";
+import React from 'react';
+import { Form, Button } from 'react-bootstrap';
 
 const AddTask = (addHandler) => {
   // const handleSubmit = async (e) => {
@@ -17,15 +17,15 @@ const AddTask = (addHandler) => {
     <>
       {/* <Form onSubmit={handleSubmit}> */}
       <tr>
-        <td colspan={3}>
+        <td colSpan={3}>
           <Form.Control type="text" placeholder="Add a new task" />
         </td>
         <td>
           <Button
             style={{
-              background: "#a16bfe",
-              border: "none",
-              color: "white",
+              background: '#a16bfe',
+              border: 'none',
+              color: 'white',
             }}
             className="search-btn"
             type="submit"
