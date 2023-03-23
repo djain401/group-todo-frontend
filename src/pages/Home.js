@@ -3,7 +3,9 @@ import { Container } from "react-bootstrap";
 import axios from "axios";
 import DisplayToDo from "../components/DisplayToDo";
 import Table from "react-bootstrap/Table";
-import AddToDo from "../components/AddToDo";
+import Search from "../components/Search";
+import { SortAlphaDown } from "react-bootstrap-icons";
+import AddTask from "../components/AddTask";
 
 const Home = () => {
   const [todoList, setTodoList] = useState([]);
@@ -44,21 +46,25 @@ const Home = () => {
     <>
       <Container className="mt-4" fluid>
         <Container>
-          <AddToDo addHandler={addHandler} />
+          <Search />
         </Container>
 
         <br />
         <br />
         <Container>
-          <Table striped bordered hover>
+          <Table style={{ width: "625px" }} striped bordered hover>
             <thead>
               <tr>
-                <th>Todo</th>
-                <th>Status</th>
-                <th>Action</th>
+                <th
+                  colspan={4}
+                  style={{ fontSize: "1.25rem", alignContent: "center" }}
+                >
+                  To Do List
+                </th>
               </tr>
             </thead>
             <tbody>
+              <AddTask addHandler={addHandler} />
               {showEmpty && <p>Your List is Empty ¯\_(ツ)_/¯</p>}
               {showItems &&
                 todoList.map((task, index) => (

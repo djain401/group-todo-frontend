@@ -1,6 +1,6 @@
 import { Form, Button } from "react-bootstrap";
 
-const AddToDo = ({ addHandler }) => {
+const Search = ({ addHandler }) => {
   // const [task, setTask] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,4 +39,4 @@ const AddToDo = ({ addHandler }) => {
   );
 };
 
-export default AddToDo;
+export default Search;
