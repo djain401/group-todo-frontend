@@ -1,9 +1,10 @@
+
 import React, { useState } from "react";
 import { Pencil, SquareFill, Trash3, Save } from "react-bootstrap-icons";
 
 import Form from "react-bootstrap/Form";
 
-const DisplayToDo = ({ task, index, updateHandler }) => {
+const DisplayToDo = ({ task, index, updateHandler ,handler}) => {
   const [updateFlag, setUpdateFlag] = useState(false);
   const [updateTask, setUpdateTask] = useState("");
 
@@ -18,6 +19,7 @@ const DisplayToDo = ({ task, index, updateHandler }) => {
       setUpdateFlag(!updateFlag);
     }
   };
+
   return (
     <>
       <tr>
@@ -44,10 +46,19 @@ const DisplayToDo = ({ task, index, updateHandler }) => {
           />
         </td>
         <td>
-          <SquareFill color={task.status ? "green" : "orange"} />
+          <SquareFill
+            color={task.status ? 'green' : 'orange'}
+            onClick={() => {
+              handler('status', index);
+            }}
+          />
         </td>
         <td>
-          <Trash3 />
+          <Trash3
+            onClick={() => {
+              handler('delete', index);
+            }}
+          />
         </td>
       </tr>
     </>

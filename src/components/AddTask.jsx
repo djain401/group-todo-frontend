@@ -1,5 +1,5 @@
-import React from "react";
-import { Form, Button } from "react-bootstrap";
+import React from 'react';
+import { Form, Button } from 'react-bootstrap';
 
 const AddTask = ({ addHandler }) => {
   const handleSubmit = async (e) => {
@@ -19,6 +19,7 @@ const AddTask = ({ addHandler }) => {
   return (
     <>
       <tr>
+
         <td colSpan={4}>
           <Form onSubmit={handleSubmit} id="form" className=" d-flex gap-3">
             <Form.Control
@@ -39,6 +40,7 @@ const AddTask = ({ addHandler }) => {
               +
             </Button>
           </Form>
+
         </td>
       </tr>
     </>
