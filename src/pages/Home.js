@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Container } from "react-bootstrap";
-import axios from "axios";
-import DisplayToDo from "../components/DisplayToDo";
-import Table from "react-bootstrap/Table";
-import AddToDo from "../components/AddToDo";
+import React, { useState, useEffect } from 'react';
+import { Container } from 'react-bootstrap';
+import axios from 'axios';
+import DisplayToDo from '../components/DisplayToDo';
+import Table from 'react-bootstrap/Table';
+import AddToDo from '../components/AddToDo';
 
 const Home = () => {
   const [todoList, setTodoList] = useState([]);
@@ -18,7 +18,7 @@ const Home = () => {
       setTodoList(result.data);
     } catch (error) {
       console.log(error);
-      alert("Error! Try again");
+      alert('Error! Try again');
     }
   };
   useEffect(() => {
@@ -50,7 +50,7 @@ const Home = () => {
         <br />
         <br />
         <Container>
-          <Table striped bordered hover>
+          {/* <Table striped bordered hover>
             <thead>
               <tr>
                 <th>Todo</th>
@@ -65,7 +65,94 @@ const Home = () => {
                   <DisplayToDo task={task} index={index} />
                 ))}
             </tbody>
+          </Table> */}
+          return ( //{' '}
+          <BootstrapTable keyField="id" data={products} columns={columns} />
+          <Table style={{ width: '625px' }} striped bordered hover>
+            <thead>
+              <tr>
+                <th>
+                  <SortAlphaDown />
+                </th>
+                <th style={{ fontSize: '1.25rem' }}>To Do List</th>
+                <th colSpan={2}>
+                  {/* <Button style={{ border: 'none', backgroundColor: '#B2BEB5' }}>
+              New To Do
+            </Button> */}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <Save />
+                  {/* <Pencil /> */}
+                </td>
+                <td>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter new To Do Task"
+                  />
+                </td>
+                <td>
+                  <SquareFill color="orange" />
+                </td>
+                <td>{/* <Trash3 /> */}</td>
+              </tr>
+              <tr>
+                <td>
+                  <Pencil />
+                </td>
+                <td>
+                  <Form.Control type="text" value="Mow the Lawn" disabled />
+                </td>
+                <td>
+                  <SquareFill color="orange" />
+                </td>
+                <td>
+                  <Trash3 />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <Pencil />
+                </td>
+                <td>
+                  <Form.Control
+                    type="text"
+                    value="Dentist at 2.30pm in Wallsend"
+                    disabled
+                  />
+                </td>
+                <td>
+                  <SquareFill color="green" />
+                </td>
+                <td>
+                  <Trash3 />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  {' '}
+                  <Pencil />
+                </td>
+                <td>
+                  <Form.Control
+                    type="text"
+                    value="Book car in for MOT"
+                    disabled
+                  />
+                </td>
+                <td>
+                  <SquareFill color="orange" />
+                </td>
+                <td>
+                  <Trash3 />
+                </td>
+              </tr>
+            </tbody>
           </Table>
+          );
         </Container>
       </Container>
     </>
