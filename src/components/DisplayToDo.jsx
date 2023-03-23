@@ -1,21 +1,48 @@
-import React from 'react';
-import { Pencil, SquareFill, Trash3, Save } from 'react-bootstrap-icons';
 
-import Form from 'react-bootstrap/Form';
-const DisplayToDo = ({ task, index, handler }) => {
+import React, { useState } from "react";
+import { Pencil, SquareFill, Trash3, Save } from "react-bootstrap-icons";
+
+import Form from "react-bootstrap/Form";
+
+const DisplayToDo = ({ task, index, updateHandler ,handler}) => {
+  const [updateFlag, setUpdateFlag] = useState(false);
+  const [updateTask, setUpdateTask] = useState("");
+
+  const handleClick = () => {
+    if (updateFlag && updateTask.length > 0) {
+      const taskData = {
+        title: updateTask,
+      };
+      updateHandler(taskData, task._id);
+      setUpdateFlag(!updateFlag);
+    } else {
+      setUpdateFlag(!updateFlag);
+    }
+  };
+
   return (
     <>
       <tr>
         <td>
-          {/* <Save /> */}
-          <Pencil />
+          {updateFlag ? (
+            <Save style={{ cursor: "pointer" }} onClick={handleClick} />
+          ) : (
+            <Pencil style={{ cursor: "pointer" }} onClick={handleClick} />
+          )}
         </td>
         <td>
           <Form.Control
             type="text"
-            value={task.title}
-            disabled
-            style={{ background: 'transparent', outline: 'none' }}
+            defaultValue={task.title}
+            disabled={updateFlag ? false : true}
+            style={{ background: "transparent", outline: "none" }}
+            onChange={(e) => {
+              e.preventDefault();
+              setUpdateTask(
+                e.target.value.replace(/^./, e.target.value[0].toUpperCase())
+              );
+            }}
+            name="title"
           />
         </td>
         <td>

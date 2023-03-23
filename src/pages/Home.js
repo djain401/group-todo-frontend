@@ -1,42 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import { Container } from 'react-bootstrap';
-import axios from 'axios';
-import DisplayToDo from '../components/DisplayToDo';
-import Table from 'react-bootstrap/Table';
-//import AddToDo from '../components/AddToDo';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-//import 'react-tooltip/dist/react-tooltip.css';
-import Accordion from 'react-bootstrap/Accordion';
-import Stack from 'react-bootstrap/Stack';
-import {
-  Pencil,
-  SquareFill,
-  SortAlphaDown,
-  Star,
-  Trash3,
-  Save,
-} from 'react-bootstrap-icons';
 
-//import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+import React, { useState, useEffect } from "react";
+import { Container } from "react-bootstrap";
+import axios from "axios";
+import DisplayToDo from "../components/DisplayToDo";
+import Table from "react-bootstrap/Table";
+import Search from "../components/Search";
+import AddTask from "../components/AddTask";
 
-//import BootstrapTable from 'react-bootstrap-table-next';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-//import React, { useState, useEffect } from 'react';
-//import { Container } from 'react-bootstrap';
-//import axios from 'axios';
-//import DisplayToDo from '../components/DisplayToDo';
-//import Table from 'react-bootstrap/Table';
-import Search from '../components/Search';
-//import { SortAlphaDown } from 'react-bootstrap-icons';
-import AddTask from '../components/AddTask';
 
 const Home = () => {
   const [todoList, setTodoList] = useState([]);
   const [showEmpty, setShowEmpty] = useState(false);
   const [showItems, setShowItems] = useState(false);
+
   const [sortCount, setSortCount] = useState(0);
+
+  const [searchValue, setSearchValue] = useState("");
 
   const addHandler = async (task) => {
     try {
@@ -49,6 +29,19 @@ const Home = () => {
       alert('Error! Try again');
     }
   };
+
+  const searchHandler = async (value) => {
+    setSearchValue(value);
+  };
+
+  const updateHandler = async (todo, id) => {
+    const result = await axios.put(
+      `${process.env.REACT_APP_BE_LOCAL}/todo/${id}`,
+      todo
+    );
+    setTodoList(result.data);
+  };
+
   useEffect(() => {
     try {
       const getTodoList = async () => {
@@ -229,7 +222,7 @@ const Home = () => {
     <>
       <Container className="mt-4" fluid>
         <Container>
-          <Search />
+          <Search searchHandler={searchHandler} />
         </Container>
 
         <br />
@@ -240,6 +233,7 @@ const Home = () => {
             <thead>
               <tr>
                 <th
+
                   onClick={testHandler}
                   colSpan={4}
                   style={{ fontSize: '1.25rem', alignContent: 'center' }}
@@ -252,13 +246,20 @@ const Home = () => {
               <AddTask addHandler={addHandler} />
               {showEmpty && <p>Your List is Empty ¯\_(ツ)_/¯</p>}
               {showItems &&
-                todoList.map((task, index) => (
-                  <DisplayToDo
-                    task={task}
-                    index={index}
-                    handler={mainHandler}
-                  />
-                ))}
+                todoList
+                  .filter((task) => {
+                    return task.title.toLocaleLowerCase().includes(searchValue);
+                  })
+                  .map((task, index) => (
+                    <DisplayToDo
+                      task={task}
+                      index={index}
+                      key={index}
+                      updateHandler={updateHandler}
+                      handler={mainHandler}
+                    />
+                  ))}
+
             </tbody>
           </Table>
         </Container>
