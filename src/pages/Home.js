@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import axios from "axios";
@@ -7,7 +5,6 @@ import DisplayToDo from "../components/DisplayToDo";
 import Table from "react-bootstrap/Table";
 import Search from "../components/Search";
 import AddTask from "../components/AddTask";
-
 
 const Home = () => {
   const [todoList, setTodoList] = useState([]);
@@ -26,7 +23,7 @@ const Home = () => {
       setTodoList(result.data);
     } catch (error) {
       console.log(error);
-      alert('Error! Try again');
+      alert("Error! Try again");
     }
   };
 
@@ -66,22 +63,22 @@ const Home = () => {
 
   const mainHandler = (iconFunction, index) => {
     switch (iconFunction) {
-      case 'A-Z':
+      case "A-Z":
         sortAZ();
         break;
-      case 'Z-A':
+      case "Z-A":
         sortZA();
         break;
-      case 'statSort':
+      case "statSort":
         //sortStatus();
         break;
-      case 'edit':
+      case "edit":
         //editHandler(index);
         break;
-      case 'status':
+      case "status":
         statusHandler(index);
         break;
-      case 'delete':
+      case "delete":
         delHandler(index);
         break;
       default:
@@ -94,7 +91,7 @@ const Home = () => {
   // toggle status of task by updating record in db
 
   const statusHandler = async (i) => {
-    console.log('in the status handler');
+    console.log("in the status handler");
 
     try {
       const tempObj = todoList[i];
@@ -110,20 +107,20 @@ const Home = () => {
       setTodoList(newTodoList.data);
     } catch (error) {
       console.log(error);
-      alert('Error! Try again');
+      alert("Error! Try again");
     }
   };
 
   // delete task in db by use of _id
 
   const delHandler = async (i) => {
-    console.log('hey we are in the delete handler');
+    console.log("hey we are in the delete handler");
 
     //let i = e.target.attributes.getNamedItem('idx').value;
-    console.log(i, '  index value');
+    console.log(i, "  index value");
 
-    if (window.confirm('Do you want to delete movie?')) {
-      console.log('in delete');
+    if (window.confirm("Are you sure you want to delete?")) {
+      console.log("in delete");
 
       try {
         const tempObj = todoList[i];
@@ -136,7 +133,7 @@ const Home = () => {
         setTodoList(newTodoList.data);
       } catch (error) {
         console.log(error);
-        alert('Error! Try again');
+        alert("Error! Try again");
       }
     }
   };
@@ -196,7 +193,7 @@ const Home = () => {
   };
 
   const testHandler = (e) => {
-    console.log('n table title    ', e);
+    console.log("n table title    ", e);
 
     switch (sortCount) {
       case 0:
@@ -221,22 +218,21 @@ const Home = () => {
   return (
     <>
       <Container className="mt-4" fluid>
-        <Container>
+        <Container style={{ width: "50vw" }}>
           <Search searchHandler={searchHandler} />
         </Container>
 
         <br />
         <br />
-        <Container>
+        <Container style={{ width: "50vw" }}>
           {/* <Table striped bordered hover> */}
-          <Table style={{ width: '625px' }} striped bordered hover>
+          <Table striped bordered hover>
             <thead>
               <tr>
                 <th
-
                   onClick={testHandler}
                   colSpan={4}
-                  style={{ fontSize: '1.25rem', alignContent: 'center' }}
+                  style={{ fontSize: "1.25rem", alignContent: "center" }}
                 >
                   To Do List
                 </th>
@@ -254,12 +250,11 @@ const Home = () => {
                     <DisplayToDo
                       task={task}
                       index={index}
-                      key={index}
+                      key={task._id}
                       updateHandler={updateHandler}
                       handler={mainHandler}
                     />
                   ))}
-
             </tbody>
           </Table>
         </Container>

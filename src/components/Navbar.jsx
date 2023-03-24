@@ -19,28 +19,26 @@ function NavBar() {
           Todo App
         </Navbar.Brand>
 
-        <Navbar>
-          <Nav
-            className="me-auto my-2 my-lg-0 d-flex gap-3"
-            style={{ maxHeight: "100px" }}
-            navbarScroll
-          >
-            {routeLinks.map((item, id) => (
-              <Link
-                key={id}
-                to={item.href}
-                style={{
-                  color: currentPath === item.href ? "white" : "#afafaf",
-                  display: "flex",
-                  alignItems: "center",
-                  fontWeight: currentPath === item.href ? "bold" : "medium",
-                }}
-              >
-                {item.title}
-              </Link>
-            ))}
-          </Nav>
-        </Navbar>
+        <Nav
+          className="justify-content-center d-flex gap-3"
+          style={{ maxHeight: "100px" }}
+          navbarScroll
+        >
+          {routeLinks.map((item, id) => (
+            <Link
+              key={id}
+              to={item.href}
+              style={{
+                color: currentPath === item.href ? "white" : "black",
+                display: "flex",
+                alignItems: "center",
+                fontWeight: currentPath === item.href ? "bold" : "medium",
+              }}
+            >
+              {item.title}
+            </Link>
+          ))}
+        </Nav>
       </Container>
     </Navbar>
   );
