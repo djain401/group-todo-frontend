@@ -1,18 +1,17 @@
 import { Form } from "react-bootstrap";
 
-const Search = ({ searchHandler }) => {
+const Search = ({ searchValue, searchHandler }) => {
   return (
     <>
-      <Form id="form" className="justify-content-center gap-3 w-50">
-        <Form.Control
-          // className="search-box py-2"
-          placeholder="Search tasks"
-          name="title"
-          onChange={(e) => {
-            searchHandler(e.target.value);
-          }}
-        />
-      </Form>
+      <Form.Control
+        type="search"
+        placeholder="Search tasks"
+        name="title"
+        onChange={(e) => {
+          searchHandler(e.target.value);
+        }}
+        value={searchValue}
+      />
     </>
   );
 };

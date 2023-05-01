@@ -19,7 +19,6 @@ const Home = () => {
     try {
       const postUrl = `${process.env.REACT_APP_BE_LOCAL}/todo`;
       const result = await axios.post(postUrl, task);
-      console.log(result.data);
       setTodoList(result.data);
     } catch (error) {
       console.log(error);
@@ -39,25 +38,37 @@ const Home = () => {
     setTodoList(result.data);
   };
 
+  const getTodoList = async () => {
+    const todos = await axios.get(`${process.env.REACT_APP_BE_LOCAL}/todo`);
+    if (todos.data.length > 0) {
+      setTodoList(todos.data);
+      setShowItems(true);
+      setShowEmpty(false);
+    } else {
+      setShowItems(false);
+      setShowEmpty(true);
+    }
+  };
+
+  useEffect(() => {
+    getTodoList();
+  }, []);
+  useEffect(() => {
+    if (!searchValue) getTodoList();
+  }, [searchValue]);
   useEffect(() => {
     try {
-      const getTodoList = async () => {
-        const todos = await axios.get(`${process.env.REACT_APP_BE_LOCAL}/todo`);
-        if (todos.data.length > 0) {
-          console.log(todos.data);
-          setTodoList(todos.data);
-          setShowItems(true);
-          setShowEmpty(false);
-        } else {
-          setShowItems(false);
-          setShowEmpty(true);
-        }
-      };
-      getTodoList();
+      if (todoList.length > 0) {
+        setShowItems(true);
+        setShowEmpty(false);
+      } else {
+        setShowItems(false);
+        setShowEmpty(true);
+      }
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [todoList]);
 
   // event handling system for icons
 
@@ -91,17 +102,12 @@ const Home = () => {
   // toggle status of task by updating record in db
 
   const statusHandler = async (i) => {
-    console.log("in the status handler");
-
     try {
       const tempObj = todoList[i];
       const idStr = tempObj._id;
-      console.log(idStr);
-      console.log(tempObj);
       tempObj.status ? (tempObj.status = false) : (tempObj.status = true);
 
       const putUrl = `${process.env.REACT_APP_BE_LOCAL}/todo/${idStr}`;
-      console.log(putUrl);
       const newTodoList = await axios.put(putUrl, tempObj);
 
       setTodoList(newTodoList.data);
@@ -114,20 +120,11 @@ const Home = () => {
   // delete task in db by use of _id
 
   const delHandler = async (i) => {
-    console.log("hey we are in the delete handler");
-
-    //let i = e.target.attributes.getNamedItem('idx').value;
-    console.log(i, "  index value");
-
     if (window.confirm("Are you sure you want to delete?")) {
-      console.log("in delete");
-
       try {
         const tempObj = todoList[i];
         const idStr = tempObj._id;
-        console.log(idStr);
         const deleteUrl = `${process.env.REACT_APP_BE_LOCAL}/todo/${idStr}`;
-        console.log(deleteUrl);
         const newTodoList = await axios.delete(deleteUrl);
 
         setTodoList(newTodoList.data);
@@ -193,8 +190,6 @@ const Home = () => {
   };
 
   const testHandler = (e) => {
-    console.log("n table title    ", e);
-
     switch (sortCount) {
       case 0:
         sortAZ();
@@ -219,7 +214,7 @@ const Home = () => {
     <>
       <Container className="mt-4" fluid>
         <Container style={{ width: "50vw" }}>
-          <Search searchHandler={searchHandler} />
+          <Search searchValue={searchValue} searchHandler={searchHandler} />
         </Container>
 
         <br />
