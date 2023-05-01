@@ -22,7 +22,7 @@ The application works with this [To-do backend application](https://github.com/d
 
 Below video shows the demo of the todo app.
 
-[![Todo app demo screenshot](./demo/to-do-app-demo-screenshot.png)](https://youtu.be/rhd0AaKD3nw)
+[![Todo app demo screenshot](./demo/to-do-app-demo-screenshot.png)](https://youtu.be/XKzUvdvdsrY)
 
 > This project is just for demo and not fit for use in producion.
 
